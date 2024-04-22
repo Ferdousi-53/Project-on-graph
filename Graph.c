@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+//creating a structure for a node of graph with all of it's property
 struct Node
 {
     int nodeid;
@@ -8,12 +8,16 @@ struct Node
     int costs[10];
 };
 
+//creating a function to add a new node in the graph
 int addNode (struct Node * p, int nid, int count)
 {
     int i =0, ncount = count;
     for (i=0;i<count;i++)
     {
-        if (p[i].nodeid == nid) { break; }
+        if (p[i].nodeid == nid)
+        {
+            break;
+        }
     }
     if (i == count)
     {
@@ -24,6 +28,7 @@ int addNode (struct Node * p, int nid, int count)
     return ncount;
 }
 
+//creating a function to add any node as adjacent of other node
 void addAdjacent (struct Node *p, int nid1, int nid2, int cost, int count)
 {
     int i =0, index;
@@ -46,13 +51,16 @@ int added (int * list, int lcount, int nid)
     int i =0;
     for (i=0;i<lcount;i++)
     {
-        if (list[i] == nid) { return 1; }
+        if (list[i] == nid)
+        {
+            return 1; 
+        }
     }
     return 0;
 }
 
-
-void findpath (struct Node * p, int count, int start, int end, int * list, int *clist, int lcount)
+//function to traversing the graph
+void findPath (struct Node * p, int count, int start, int end, int * list, int *clist, int lcount)
 {
     int index = 0, i=0;
    
@@ -73,7 +81,11 @@ void findpath (struct Node * p, int count, int start, int end, int * list, int *
    
     for (i=0;i<count;i++)
     {
-        if (p[i].nodeid == start) { index = i; break; }
+        if (p[i].nodeid == start) 
+        {
+            index = i; 
+            break; 
+        }
     }
    
     for (i=0;i<p[index].adjcount;i++)
@@ -91,15 +103,15 @@ void findpath (struct Node * p, int count, int start, int end, int * list, int *
     }
 }
 
-
+//the main function
 int main() {
     // Write C code here
-    //printf("Hello world");
    
     struct Node nodes[50];
     int nodecount = 0;
     int n1=0, n2=0, c = 0;
-   
+
+    //adding the node of the graph
     while (1)
     {
         printf ("n1, n2, cost ? ");
@@ -116,7 +128,9 @@ int main() {
     printf ("start, end ? ");
     scanf ("%d %d", &start, &end);
     int list[50], clist[50], lcount = 0;
-    list[0] = start; clist[0] = 0; lcount = 1;
+    list[0] = start;
+    clist[0] = 0;
+    lcount = 1;
 
     findpath (nodes, nodecount, start, end, list, clist, lcount);
 
